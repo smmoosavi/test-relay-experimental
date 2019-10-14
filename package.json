@@ -7,12 +7,19 @@
     "@types/node": "12.7.11",
     "@types/react": "16.9.5",
     "@types/react-dom": "16.9.1",
+    "@types/react-relay": "^6.0.1",
+    "@types/relay-runtime": "^6.0.6",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-relay": "^6.0.0",
     "react-scripts": "3.2.0",
-    "typescript": "3.6.3"
+    "relay-experimental": "../relay/dist/relay-experimental",
+    "relay-runtime": "../relay/dist/relay-runtime",
+    "typescript": "^3.6.3"
   },
   "scripts": {
+    "get-schema": "graphql get-schema -e default",
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql --language typescript",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -33,7 +40,14 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "http://localhost:4000/",
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "babel-plugin-relay": "^6.0.0",
+    "graphql": "^14.5.8",
+    "graphql-cli": "^3.0.14",
+    "prettier": "^1.18.2",
+    "relay-compiler": "^6.0.0",
+    "relay-compiler-language-typescript": "^8.0.0",
+    "relay-config": "^6.0.0"
   }
 }
