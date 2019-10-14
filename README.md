@@ -1,44 +1,120 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Relay Experimental Try
 
-## Available Scripts
+a few days ago relay repository [announced](https://github.com/facebook/relay/releases) that unreleased relay-experimental is added to the relay project. you can find codes [here](https://github.com/facebook/relay/tree/master/packages/relay-experimental)
 
-In the project directory, you can run:
+> Added unreleased relay-experimental package which contains experimental version of Relay Hooks using React Suspense.
 
-### `yarn start`
+I was very excited to see the hook version of the relay will be released. so I tried to use the unreleased relay experimental in the sample project
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Install
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+git clone https://github.com/smmoosavi/swapi-graphql.git
+yarn
+PORT=4000 yarn start
+```
 
-### `yarn test`
+```bash
+git clone https://github.com/smmoosavi/relay.git
+yarn
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone https://github.com/smmoosavi/test-relay-experimental.git
+cd test-relay-experimental
+yarn
+yarn start
+```
 
-### `yarn build`
+note: `relay` and `test-relay-experimental` should be in the same directory.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# New apis
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## RelayEnvironmentProvider
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```tsx
+<RelayEnvironmentProvider environment={environment}>
+  {/* ... */}
+</RelayEnvironmentProvider>
+```
 
-### `yarn eject`
+## useLazyLoadQuery
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```tsx
+useLazyLoadQuery(query, variables, options);
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## useFragment
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```tsx
+useFragment(fragment, fragmentRef);
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Example
 
-## Learn More
+```tsx
+// app.tsx
+const app = () => {
+  return (
+    <RelayEnvironmentProvider environment={environment}>
+      <Suspense fallback="loading">
+        <Films />
+      </Suspense>
+    </RelayEnvironmentProvider>
+  );
+};
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```tsx
+// Films.tsx
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+const query = graphql`
+  query FilmsQuery {
+    allFilms {
+      edges {
+        node {
+          id
+          ...FilmItem_film
+        }
+      }
+    }
+  }
+`;
+
+const Films = () => {
+  const data = useLazyLoadQuery(query, {});
+
+  return (
+    <div>
+      {data.allFilms.edges.map(edge => {
+        return (
+          <div key={edge.node.id}>
+            <FilmItem film={edge.node} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+```
+
+```tsx
+// FilmItem.tsx
+
+const fragment = graphql`
+  fragment FilmItem_film on Film {
+    id
+    title
+  }
+`;
+
+const FilmItem = (props) => {
+  const data = useFragment(fragment, props.film);
+
+  return (
+    <div>
+      {data.title}
+    </button>
+  );
+};
+```
