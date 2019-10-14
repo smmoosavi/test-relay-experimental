@@ -28,7 +28,7 @@ yarn start
 
 note: `relay` and `test-relay-experimental` should be in the same directory.
 
-# New apis
+# New APIs
 
 ## RelayEnvironmentProvider
 
@@ -86,13 +86,11 @@ const Films = () => {
 
   return (
     <div>
-      {data.allFilms.edges.map(edge => {
-        return (
-          <div key={edge.node.id}>
-            <FilmItem film={edge.node} />
-          </div>
-        );
-      })}
+      {data.allFilms.edges.map(edge => (
+        <div key={edge.node.id}>
+          <FilmItem film={edge.node} />
+        </div>
+      ))}
     </div>
   );
 };
