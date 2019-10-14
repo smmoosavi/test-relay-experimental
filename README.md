@@ -50,7 +50,7 @@ useLazyLoadQuery(query, variables, options);
 useFragment(fragment, fragmentRef);
 ```
 
-# Example
+# Example with new API
 
 ```tsx
 // app.tsx
@@ -115,4 +115,79 @@ const FilmItem = (props) => {
     </button>
   );
 };
+```
+
+# Example with old APIs
+
+```tsx
+// App.tsx
+
+const app = () => {
+  return <Films />;
+};
+```
+
+```tsx
+// Films.tsx;
+
+const Film = () => {
+  return (
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+        query FilmsQuery {
+          allFilms {
+            edges {
+              node {
+                id
+                ...FilmItem_film
+              }
+            }
+          }
+        }
+      `}
+      variables={{}}
+      render={({ error, props }) => {
+        if (error) {
+          return <div>Error!</div>;
+        }
+        if (!props) {
+          return <div>Loading...</div>;
+        }
+        return (
+          <div>
+            {props.allFilms.edges.map(edge => (
+              <div key={edge.node.id}>
+                <FilmItem film={edge.node} />
+              </div>
+            ))}
+          </div>
+        );
+      }}
+    />
+  );
+};
+```
+
+```tsx
+// FilmItem.tsx
+const FilmItem = (props) => {
+  return (
+    <div>
+      {props.film.title}
+    </button>
+  );
+};
+
+export default createFragmentContainer(
+  FilmItem,
+  {
+    film: graphql`
+       fragment FilmItem_film on Film {
+         id
+         title
+       }
+    `
+  },
+)
 ```
