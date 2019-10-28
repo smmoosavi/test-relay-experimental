@@ -1,13 +1,11 @@
 import graphql from 'babel-plugin-relay/macro';
 import React from 'react';
-import { useFragment } from 'relay-experimental';
-import {
-  OpeningCrawl_film,
-  OpeningCrawl_film$ref,
-} from './__generated__/OpeningCrawl_film.graphql';
+import { useFragment } from 'react-relay/hooks';
+import { FragmentRef } from 'relay-runtime';
+import { OpeningCrawl_film } from './__generated__/OpeningCrawl_film.graphql';
 
 interface Props {
-  film: OpeningCrawl_film$ref;
+  film: FragmentRef<OpeningCrawl_film>;
 }
 
 const fragment = graphql`

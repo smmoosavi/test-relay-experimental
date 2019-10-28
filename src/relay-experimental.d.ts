@@ -1,4 +1,4 @@
-declare module 'relay-experimental' {
+declare module 'react-relay/hooks' {
   import { FunctionComponent } from 'react';
   import { Environment, FetchPolicy } from 'react-relay';
   import { CacheConfig, GraphQLTaggedNode, OperationType } from 'relay-runtime';

@@ -3,19 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.11",
-    "@types/react": "16.9.5",
-    "@types/react-dom": "16.9.1",
-    "@types/react-relay": "^6.0.1",
-    "@types/relay-runtime": "^6.0.6",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-relay": "^6.0.0",
+    "@types/jest": "24.0.20",
+    "@types/node": "12.11.7",
+    "@types/react": "16.9.11",
+    "@types/react-dom": "16.9.3",
+    "@types/react-relay": "^6.0.2",
+    "@types/relay-runtime": "^6.0.7",
+    "react": "^0.0.0-experimental-f6b8d31a7",
+    "react-dom": "^0.0.0-experimental-f6b8d31a7",
+    "react-relay": "^0.0.0-experimental-a1a40b68",
     "react-scripts": "3.2.0",
-    "relay-experimental": "../relay/dist/relay-experimental",
-    "relay-runtime": "../relay/dist/relay-runtime",
-    "typescript": "^3.6.3"
+    "relay-runtime": "^7.0.0",
+    "typescript": "^3.6.4"
   },
   "scripts": {
     "get-schema": "graphql get-schema -e default",
@@ -42,12 +41,12 @@
   },
   "proxy": "http://localhost:4000/",
   "devDependencies": {
-    "babel-plugin-relay": "^6.0.0",
+    "babel-plugin-relay": "^7.0.0",
     "graphql": "^14.5.8",
     "graphql-cli": "^3.0.14",
     "prettier": "^1.18.2",
     "relay-compiler": "^6.0.0",
-    "relay-compiler-language-typescript": "^8.0.0",
-    "relay-config": "^6.0.0"
+    "relay-compiler-language-typescript": "^9.0.0",
+    "relay-config": "^7.0.0"
   }
 }

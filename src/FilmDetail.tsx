@@ -1,6 +1,6 @@
 import graphql from 'babel-plugin-relay/macro';
 import React from 'react';
-import { useLazyLoadQuery } from 'relay-experimental';
+import { useLazyLoadQuery } from 'react-relay/hooks';
 import { FilmDetailQuery } from './__generated__/FilmDetailQuery.graphql';
 import OpeningCrawl from './OpeningCrawl';
 

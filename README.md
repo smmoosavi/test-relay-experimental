@@ -1,24 +1,22 @@
 # Relay Experimental Try
 
-a few days ago relay repository [announced](https://github.com/facebook/relay/releases) that unreleased relay-experimental is added to the relay project. you can find codes [here](https://github.com/facebook/relay/tree/master/packages/relay-experimental)
+a few days ago relay repository [announced](https://github.com/facebook/relay/releases) that ~~unreleased~~ relay-experimental is added to the relay project. you can find codes [here](https://github.com/facebook/relay/tree/master/packages/relay-experimental)
 
 > Added unreleased relay-experimental package which contains experimental version of Relay Hooks using React Suspense.
 
-I was very excited to see the hook version of the relay will be released. so I tried to use the unreleased relay experimental in the sample project
+I was very excited to see the hook version of the relay will be released. so I tried to use the relay experimental in the sample project
+
+Update: now we can install relay experimental `react-relay@experimental`. see official documentation [here](https://relay.dev/docs/en/experimental/a-guided-tour-of-relay)
 
 # Install
-
+server:
 ```bash
 git clone https://github.com/smmoosavi/swapi-graphql.git
 yarn
 PORT=4000 yarn start
 ```
 
-```bash
-git clone https://github.com/smmoosavi/relay.git
-yarn
-```
-
+web app:
 ```
 git clone https://github.com/smmoosavi/test-relay-experimental.git
 cd test-relay-experimental
@@ -26,10 +24,8 @@ yarn
 yarn start
 ```
 
-note: `relay` and `test-relay-experimental` should be in the same directory.
-
 # New APIs
-
+you can find official api [here](https://relay.dev/docs/en/experimental/api-reference)
 ## RelayEnvironmentProvider
 
 ```tsx

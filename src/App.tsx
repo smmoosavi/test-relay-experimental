@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from 'react';
-import { RelayEnvironmentProvider } from 'relay-experimental';
+import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import './App.css';
 import { ErrorBoundary } from './ErrorBoundary';
 import { ErrorViewer } from './ErrorViewer';
@@ -16,11 +16,11 @@ const App: React.FC = () => {
           <Suspense fallback="loading">
             <Films setId={setId} />
           </Suspense>
-          <ErrorBoundary errorChildren={<ErrorViewer nonce={id} />}>
-            <Suspense fallback="loading">
+          <Suspense fallback="loading">
+            <ErrorBoundary errorChildren={<ErrorViewer nonce={id} />}>
               {id !== null && <FilmDetail id={id} />}
-            </Suspense>
-          </ErrorBoundary>
+            </ErrorBoundary>
+          </Suspense>
         </ErrorBoundary>
       </RelayEnvironmentProvider>
     </div>
