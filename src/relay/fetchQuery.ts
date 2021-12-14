@@ -14,7 +14,7 @@ export function fetchQuery(
       query: operation.text,
       variables,
     }),
-  }).then(response => {
+  }).then((response) => {
     return response.json();
   });
 }

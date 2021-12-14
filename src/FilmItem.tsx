@@ -1,8 +1,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import React, { useTransition } from 'react';
 import { useFragment } from 'react-relay/hooks';
-import { FragmentRef } from 'relay-runtime';
-import { FilmItem_film } from './__generated__/FilmItem_film.graphql';
+import { FilmItem_film$key } from './__generated__/FilmItem_film.graphql';
 
 const fragment = graphql`
   fragment FilmItem_film on Film {
@@ -12,13 +11,13 @@ const fragment = graphql`
 `;
 
 interface Props {
-  film: FragmentRef<FilmItem_film>;
+  film: FilmItem_film$key;
   setId: (id: string) => void;
 }
 
 export function FilmItem(props: Props) {
-  const [startTransition, isPending] = useTransition({ timeoutMs: 1000 });
-  const data = useFragment<FilmItem_film>(fragment, props.film);
+  const [isPending, startTransition] = useTransition();
+  const data = useFragment<FilmItem_film$key>(fragment, props.film);
   return (
     <button
       onClick={() => {
