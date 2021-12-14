@@ -1,25 +1,18 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import './App.css';
-import { ErrorBoundary } from './ErrorBoundary';
-import { ErrorViewer } from './ErrorViewer';
-import { FilmDetail } from './FilmDetail';
-import { Films } from './Films';
+import { Page } from './Page';
 import { environment } from './relay';
+import { ErrorBoundary } from './shared/error-boundary';
+import { ErrorView } from './shared/error-view';
 
 const App: React.FC = () => {
-  const [id, setId] = useState<string | null>(null);
   return (
     <div className="App">
       <RelayEnvironmentProvider environment={environment}>
-        <ErrorBoundary errorChildren={<ErrorViewer />}>
-          <Suspense fallback="loading">
-            <Films setId={setId} />
-          </Suspense>
-          <Suspense fallback="loading">
-            <ErrorBoundary errorChildren={<ErrorViewer nonce={id} />}>
-              {id !== null && <FilmDetail id={id} />}
-            </ErrorBoundary>
+        <ErrorBoundary fallback={<ErrorView retry />}>
+          <Suspense fallback={'loading'}>
+            <Page />
           </Suspense>
         </ErrorBoundary>
       </RelayEnvironmentProvider>

@@ -3,6 +3,7 @@ import React from 'react';
 import { useLazyLoadQuery } from 'react-relay/hooks';
 import { FilmDetailQuery } from './__generated__/FilmDetailQuery.graphql';
 import OpeningCrawl from './OpeningCrawl';
+import { useRetryKey } from './shared/retry';
 
 const query = graphql`
   query FilmDetailQuery($id: ID!) {
@@ -19,12 +20,11 @@ interface Props {
 }
 
 export function FilmDetail(props: Props) {
+  const fetchKey = useRetryKey();
   const data = useLazyLoadQuery<FilmDetailQuery>(
     query,
     { id: props.id },
-    {
-      fetchPolicy: 'network-only',
-    },
+    { fetchKey, fetchPolicy: 'network-only' },
   );
   if (data.film === null) {
     return <div>Not found</div>;

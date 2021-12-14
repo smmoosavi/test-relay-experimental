@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@forminator/react-wire": "^0.4.2",
     "@types/jest": "27.0.3",
     "@types/node": "16.11.12",
     "@types/react": "17.0.37",
