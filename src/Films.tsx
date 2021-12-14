@@ -39,6 +39,7 @@ export function Films(props: Props) {
           </div>
         );
       })}
+      <button onClick={() => props.id$.setValue('ZmlsbXM6NDQ0')}>bad id</button>
     </div>
   );
 }
